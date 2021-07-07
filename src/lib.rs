@@ -296,7 +296,7 @@ where
         }
         Destructor { .. } => Ok(serde_json::Value::Null),
         GetNewAddress { .. } => {
-            serde_json::to_value(&wallet.get_address(New)?).map_err(BdkJniError::Serialization)
+            serde_json::to_value(&*wallet.get_address(New)?).map_err(BdkJniError::Serialization)
         }
         Sync { max_address, .. } => {
             serde_json::to_value(&wallet.sync(noop_progress(), max_address)?)
